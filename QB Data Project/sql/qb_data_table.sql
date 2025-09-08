@@ -60,5 +60,6 @@ CREATE TABLE qb_data
 );
 
 --Imported my CSV FILE to fill the table (cleaned_qb_data.csv)
+--Make sure to check header box when importing
 
 SELECT * FROM qb_data;
