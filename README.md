@@ -79,10 +79,10 @@ Out of the top 15 Qbs in regular season passing yards, only 9 appear in the top 
 
 
 **2. QBs are throwing the ball shorter, and total passing yards are declining.**
-Average air yards per attempt peaked at 8.54 in 2016 and dropped to 7.51 by 2024. Over the same period, average passing yards per season (min 8+ games) fell from 3,761 in 2016 to 2,874 in 2024 (about a 24% decrease). Defenses have become more adapted to the deep ball, having deeper zone drops. This has caused offenses to look toward shorter throws and decreased overall yardage totals.
+Average yards thrown downfield peaked at 8.82 in 2016 and dropped to 7.62 by 2024. Over the same period, average passing yards per season (min 8+ games) fell from 3,760.7 in 2016 to 2,873.64 in 2024 (about a 24% decrease). Defenses have become more adapted to the deep ball, having deeper zone drops. This has caused offenses to look toward shorter throws and decreased overall yardage totals.
 
 **3. Quarterbacks are running more.**
-Among QBs with at least 5 rush attempts, average rushing yards per season jumped from 123.9 in 2015 to 178.3 in 2024 (a 44% increase). Yards per carry also increased from 2.93 to 3.86 over the same time span. Offenses are not just using their QBs as runners more often, they are adapting the offense around it.
+Among QBs with at least 5 rush attempts, average rushing yards per season jumped from 123.88 in 2015 to 178.25 in 2024 (a 44% increase). Yards per carry also increased from 2.93 to 3.86 over the same time span. Offenses are not just using their QBs as runners more often, they are adapting the offense around it.
 
 **4. Elite passer rating seasons come from the same handful of QBs.**
 In the top 15 single-season passer ratings from 2015-2024 (min 6 games and 1,500 yards), Aaron Rodgers, Lamar Jackson, Drew Brees, and Russell Wilson each appear twice. Aaron Rodgers' 2020 season leads the list 122.68. Over half of the list is made up of repeat appearances, showing how big the gap is between truly elite QBs and everyone else.
