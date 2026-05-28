@@ -1,6 +1,6 @@
 --Please View README Before Continuing
 --Creates the Views Needed For Graphs
-1.
+--1.
 --Top 30 QBs by total passing yards from 2015-2024
 CREATE VIEW top_30_pass_yards
 AS
@@ -21,7 +21,7 @@ AS
 --Proof it works
 SELECT * FROM top_30_pass_yards;
 
-2.
+--2.
 --Shows the difference in Avg passing yards for qbs who played at least 8 games over 2015-2024
 --Look into adding avg air yards pass attempts and interceptions
 CREATE VIEW avg_yards_season
@@ -36,7 +36,7 @@ AS
 --Proof it works
 SELECT * FROM avg_yards_season;
 
-3.
+--3.
 --Shows stats of QBs with the top 30 passer ratings in a single season (players can repeat)
 --Minimum 6 games played and 1500 yards thrown
 CREATE VIEW top_30_passer_rating
@@ -61,7 +61,7 @@ AS
 --Proof it works
 SELECT * FROM top_30_passer_rating;
 		   
-4.
+--4.
 --Data does not show much 
 --Shows the average of all qbs yards thrown down the field per pass per season
 CREATE VIEW avg_yds_thrown_downfield
@@ -73,10 +73,10 @@ AS
 	GROUP BY season
 	ORDER BY (season) DESC;
 
---Prood it works
+--Proof it works
 SELECT * FROM avg_yds_thrown_downfield;
 
-5. 
+--5. 
 --Top 30 in total yards (rushing and passing) from 2015-2024
 CREATE VIEW top_30_total_yards
 AS
@@ -97,7 +97,7 @@ AS
 --Proof it works
 SELECT * FROM top_30_total_yards;
 
-6.
+--6.
 --Shows the average rushing yards per season by all qbs combined
 --Must have had over 5 attemps
 CREATE VIEW avg_qb_rush_yards_season
@@ -115,7 +115,7 @@ AS
 		   
 SELECT * FROM avg_qb_rush_yards_season;
 
-7.
+--7.
 --Best TD to Int Ratio With a Minimum of 10 starts and 250 attempts
 CREATE VIEW best_td_int_per_season
 AS
@@ -135,7 +135,7 @@ AS
 --Proof it works
 SELECT * FROM best_td_int_per_season;
 
-8. 
+--8. 
 --Top Playoff Performers
 CREATE VIEW top_playoff_performers
 AS
