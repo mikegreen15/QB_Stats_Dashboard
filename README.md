@@ -5,15 +5,15 @@ This project analyzes NFL quarterback trends and performance from 2016–2025 us
 All calculations and derived metrics are computed using Python or SQL. The Power BI report uses **no DAX measures or calculated columns** — every value shown is computed before it reaches the report.
 
 ## 🚨 DISCLAIMER
-This project uses a third-party data source [(https://github.com/nflverse/nflverse-data/releases/tag/stats_player)] Data from this source may be inaccurate or incomplete. This project is solely intended to demonstrate skills in Python, SQL, and Power BI.
+This project uses a third-party data source [nflverse-data (stats_player)](https://github.com/nflverse/nflverse-data/releases/tag/stats_player) Data from this source may be inaccurate or incomplete. This project is solely intended to demonstrate skills in Python, SQL, and Power BI.
 
 ## 👨‍💻 Applications Used / Needed to Replicate
-- **Python** — see `requirements.txt` for needed packages (pandas, psycopg2, numpy)
+- **Python** — see See [requirements.txt](python/requirements.txt) for dependencies. for needed packages (pandas, psycopg2, numpy)
 - **PostgreSQL** — database and views (developed using DBeaver)
 - **Power BI Desktop** — report building and visualization
 
 ## 📊 Data Source
-[(https://github.com/nflverse/nflverse-data/releases/tag/stats_player)]
+[nflverse-data (stats_player)](https://github.com/nflverse/nflverse-data/releases/tag/stats_player)
 Includes regular season and postseason statistics for all NFL Players, I have only chosen 2016–2025.
 
 # 🧩 Process of Project
@@ -41,7 +41,7 @@ Includes regular season and postseason statistics for all NFL Players, I have on
 | Passer Rating | Standard NFL formula |
 
 ### 2. 📝 PostgreSQL
-- Created the database and `qb_data` table, matching the column order and types of the exported CSV.
+- Created the database and [qb_data_table.sql](sql/qb_data_table.sql) table, matching the column order and types of the exported CSV.
 - Imported the cleaned CSV via DBeaver's Import Data wizard.
 - Created 11 views to feed the Power BI report, covering both regular season and postseason data:
 
@@ -63,7 +63,7 @@ Includes regular season and postseason statistics for all NFL Players, I have on
 - Connected to the postgre server using (creating the connection using pyscopg2).
 - Created a blank excel file in which I looped over each of the views, making each its own separate page.
 ### Setup Notes
-- Before running `qb_data.ipynb`, update the PostgreSQL connection details (host, database, user, password) to match your local environment — see inline comments in the connection cell.
+- Before running [qb_data.ipynb](python/qb_data.ipynb), update the PostgreSQL connection details (host, database, user, password) to match your local environment — see inline comments in the connection cell.
 
 ### 4. 🖥️ Power BI Dashboard
 - Connected Power BI directly to the Excel workbook created in the previous step, with each sheet mapped to its corresponding view.
@@ -93,7 +93,7 @@ Average pass attempts per QB fell 16.28% from 2016 to 2025. Despite this, the sh
 
 ```
 ├── analysis_ready_data/
-│   ├── qb_data_views.xls    # Excel file containing all of the views
+│   ├── qb_data_views.xlsx    # Excel file containing all of the views
 ├── cleandata/
 │   ├── cleaned_qb_stats.csv # CSV file created only grabbing the QB position and stats desired
 ├── powerbi/
