@@ -4,6 +4,9 @@ This project analyzes NFL quarterback trends and performance from 2016–2025 us
 
 All calculations and derived metrics are computed using Python or SQL. The Power BI report uses **no DAX measures or calculated columns** — every value shown is computed before it reaches the report.
 
+## 📖 Table of Contents
+(Add table of contents here)
+
 ## 🚨 DISCLAIMER
 This project uses a third-party data source [nflverse-data (stats_player)](https://github.com/nflverse/nflverse-data/releases/tag/stats_player) Data from this source may be inaccurate or incomplete. This project is solely intended to demonstrate skills in Python, SQL, and Power BI.
 
@@ -14,7 +17,7 @@ This project uses a third-party data source [nflverse-data (stats_player)](https
 
 ## 📊 Data Source
 [nflverse-data (stats_player)](https://github.com/nflverse/nflverse-data/releases/tag/stats_player)
-Includes regular season and postseason statistics for all NFL Players, I have only chosen 2016–2025.
+Includes regular season and postseason statistics for all NFL Players, I have only chosen 2016–2025. This project is not affiliated with or endorsed by the NFL.
 
 # 🧩 Process of Project
 
@@ -72,13 +75,18 @@ Includes regular season and postseason statistics for all NFL Players, I have on
 **Page 1 — Game Development**
 League-wide trend page. Tracks how the passing game has evolved from 2016–2025: average pass attempts, air yard distribution, and QB rushing trends over time.
 
+** ADD PICTURE OF PAGE HERE
+
 **Page 2 —QB Efficiency**
 Player-level efficiency page. Passer rating vs. yards-per-attempt, EPA vs. touchdowns, and season-over-season risers/fallers.
+
+** ADD PICTURE OF PAGE HERE
 
 **Page 3 — QB Statistics**
 Interactive leaderboard page. Top passing/rushing yardage, TD:INT ratio rankings, and a player slicer for exploration.
 
-Design convention throughout: bold page titles, italic subtitles, and explicit filter-context notes under each chart (e.g., "Min 6 games and 250+ pass attempts") so sample-size context is always visible.
+** ADD PICTURE OF PAGE HERE
+
 
 ## 👨‍🏫 Findings
 
@@ -89,14 +97,28 @@ Average pass attempts per QB fell 16.28% from 2016 to 2025. Despite this, the sh
 
 **3.** [FILL IN For Page 2 of Power BI Report]
 
+## 🚀 How to Reproduce (Add links here)
+1. Clone this repo
+2. `pip install -r python/requirements.txt`
+3. Update PostgreSQL credentials in `qb_data.ipynb`
+4. Run `qb_data_table.sql`, then `qb_data_views.sql` in PostgreSQL
+5. Run `qb_data.ipynb` to clean data and generate the Excel workbook
+6. Open `qb_report.pbix` in Power BI Desktop
+
+## 🛠️ Skills Demonstrated
+- Data cleaning & feature engineering (pandas, numpy)
+- Relational database design (PostgreSQL, SQL views, aggregate functions, window filters)
+- BI report design without DAX — calculation logic kept in Python/SQL
+- End-to-end pipeline architecture (raw data → transform → store → visualize)
+
 ## 🗂️ File Structure
 
 ```
 ├── analysis_ready_data/
-│   ├── qb_data_views.xlsx    # Excel file containing all of the views
+│   ├── qb_data_views.xlsx   # Excel file containing all of the views
 ├── cleandata/
 │   ├── cleaned_qb_stats.csv # CSV file created only grabbing the QB position and stats desired
-├── powerbi/
+├── power_bi/
 │   ├── qb_report.pbix       # Final three-page Power BI report
 ├── python/
 │   ├── qb_data.ipynb        # Main Python notebook (cleaning + feature engineering + export)
