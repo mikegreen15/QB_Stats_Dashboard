@@ -1,104 +1,113 @@
-# QB Stats Dashboard
-This project analyzes NFL quarterback performance from 2015–2024 using Python, SQL, and Excel.  
-The workflow includes raw data cleaning, storing and querying it in PostgreSQL, and building an interactive Excel dashboard for analysis.
+# 🏈 NFL QB Analytics Dashboard (2016–2025)
 
+This project analyzes NFL quarterback trends and performance from 2016–2025 using Python, SQL, and Power BI. The workflow covers raw data ingestion and cleaning, storing and querying the data in PostgreSQL, and building a three-page interactive Power BI report for analysis — regular season and postseason.
 
-## DISCLAIMER 
-This Project uses a 3rd party data source from Kaggle. Data from this file may be inaccurate or missing. This is solely to demonstrate skills of Python, SQL, and Excel
+All calculations and derived metrics are computed using Python or SQL. The Power BI report uses **no DAX measures or calculated columns** — every value shown is computed before it reaches the report.
 
-## Applications Used / Needed to Replicate
-- Python - see requirements.txt for needed packages
-- SQL (PostgreSQL)
-- Excel (Pivot Tables + Slicers)
+## 🚨 DISCLAIMER
+This project uses a third-party data source [(https://github.com/nflverse/nflverse-data/releases/tag/stats_player)] Data from this source may be inaccurate or incomplete. This project is solely intended to demonstrate skills in Python, SQL, and Power BI.
 
+## 👨‍💻 Applications Used / Needed to Replicate
+- **Python** — see `requirements.txt` for needed packages (pandas, psycopg2, numpy)
+- **PostgreSQL** — database and views (developed using DBeaver)
+- **Power BI Desktop** — report building and visualization
 
+## 📊 Data Source
+[(https://github.com/nflverse/nflverse-data/releases/tag/stats_player)]
+Includes regular season and postseason statistics for all NFL Players, I have only chosen 2016–2025.
 
-## Data Source
-Dataset obtained from Kaggle:
-https://www.kaggle.com/datasets/philiphyde1/nfl-stats-1999-2022?resource=download&select=yearly_player_stats_offense.csv
-Includes statistics from NFL offensive skill positions. This project filters to QBs only,
-seasons 2015-2024
+# 🧩 Process of Project
 
-
-
-## Process of Project
-1. **Data Collecting & Cleaning (Python)**
-  - Downloaded the raw data source from Kaggle.
-  - Using Pandas, read in the CSV file in Python.
-  - Filter out the data needed. Specific stats from only QBs in the seasons 2015-2024.
-  - Remove Nulls.
-  - Leverages existing data to engineer new stats fields for each QB. (shown below)
-  - Exported the cleaned data as a CSV file to upload to our database.
+### 1. 🧹 Data Collecting & Cleaning (Python)
+- Pulled raw regular season and postseason QB data from 2016-2025 seasons.
+- Using pandas, filtered to QB-specific stats across the chosen seasons.
+- Engineered new stat fields for each QB season, listed below.
+- Cleaned nulls and handled edge cases (e.g., zero-interception seasons in ratio calculations).
+- Exported the cleaned data as a CSV to import into PostgreSQL.
 
 | Stat | Formula |
 |---|---|
 | Completion % | Completions / Attempts × 100 |
 | TD:INT Ratio | Pass TDs / Interceptions |
-| Red Zone Completion % | Red Zone Completions / Red Zone Attempts × 100 |
 | Total Turnovers | Interceptions + Fumbles Lost |
-| Shotgun % | Shotgun Snaps / Offensive Snaps × 100 |
-| Dropback % | QB Dropbacks / Offensive Snaps × 100 |
 | Yards Per Attempt | Passing Yards / Pass Attempts |
 | TD Per Attempt | Pass TDs / Pass Attempts |
 | Air Yards Per Attempt | Passing Air Yards / Pass Attempts |
 | Yards Per Rush | Rushing Yards / Rush Attempts |
+| Total Yards | Passing + Rushing + Receiving Yards |
+| Total TDs | Passing + Rushing + Receiving TDs |
+| Total EPA | Passing EPA + Rushing EPA |
+| EPA Per Dropback | Total EPA / Total Dropbacks |
 | Passer Rating | Standard NFL formula |
 
-
-2. **Leveraging SQL**
-- Created the database, "qbstats"
-- Keeping the same order and type as your exported CSV file, create the qb_data table.
-- Import the CSV created from step 1 into your table.
-- Created 8 views to pull specific cuts of data for the dashboard:
+### 2. 📝 PostgreSQL
+- Created the database and `qb_data` table, matching the column order and types of the exported CSV.
+- Imported the cleaned CSV via DBeaver's Import Data wizard.
+- Created 11 views to feed the Power BI report, covering both regular season and postseason data:
 
 | View | What It Shows |
 |---|---|
-| `top_30_pass_yards` | Top 30 QBs by total passing yards, 2015–2024 |
-| `avg_yards_season` | Average passing yards per season (min. 8 games) |
-| `top_30_passer_rating` | Top 30 single-season passer ratings (min. 6 games, 1,500 yards) |
-| `avg_yds_thrown_downfield` | Average air yards per attempt by season |
-| `top_30_total_yards` | Top 30 QBs by total yards (passing + rushing) |
-| `avg_qb_rush_yards_season` | Average QB rushing stats per season (min. 5 attempts) |
-| `best_td_int_per_season` | Best single-season TD:INT ratios (min. 10 starts, 250 attempts) |
+| `top_25_reg_pass_yards` | Top 25 QBs by total regular season passing yards, 2016–2025 |
+| `avg_yards_reg_season` | Average passing stats per regular season (min. 6 games, 75+ attempts) |
+| `top_25_reg_passer_rating` | Top 25 single-season passer ratings (min. 6 games, 1,500+ yards) |
+| `avg_yds_thrown_downfield_reg` | Average air yards per attempt by season, plus air yard distribution |
+| `top_25_reg_total_yards` | Top 25 QBs by total yards (passing + rushing), 2016–2025 |
+| `avg_qb_rush_reg_yards_season` | Average QB rushing stats per season (min. 6 games, 20+ carries) |
+| `best_td_int_per_reg_season` | Best single-season TD:INT ratios (min. 10 games, 250+ attempts) |
 | `top_playoff_performers` | Top 25 QBs by total playoff passing yards |
+| `combined_reg_post_stats` | Regular season + postseason stats combined per player |
+| `reg_vs_post_game_avg` | Per-game regular season vs. postseason performance comparison (min. 3 playoff games) |
+| `epa_vs_tds_scored` | EPA and dropback efficiency vs. touchdowns scored by season |
 
+### 3. 🐍 Connecting to Database and Created One Excel File (Python)
+- Connected to the postgre server using (creating the connection using pyscopg2).
+- Created a blank excel file in which I looped over each of the views, making each its own separate page.
+### Setup Notes
+- Before running `qb_data.ipynb`, update the PostgreSQL connection details (host, database, user, password) to match your local environment — see inline comments in the connection cell.
 
-3. **Creating an Excel-Ready File (Python)**
-- Connect Python to the SQL server using psycopg2.
-- Listed out the views to use and a file path for the Excel output.
-- Looped using ExcelWriter to create a Workbook with each of the view as its own sheet.
+### 4. 🖥️ Power BI Dashboard
+- Connected Power BI directly to the Excel workbook created in the previous step, with each sheet mapped to its corresponding view.
+- Built a three-page report, all calculations pre-computed in Python/SQL — no DAX used.
 
-4. **Excel Dashboard**
-- Create Pivot Tables based on the worksheets.
-- Built graphs, tables, etc.
-- Used slicers where applicable.
+**Page 1 — Game Development**
+League-wide trend page. Tracks how the passing game has evolved from 2016–2025: average pass attempts, air yard distribution, and QB rushing trends over time.
 
-## Findings
-**1. Regular season success does not guarantee playoff success.**
-Out of the top 15 Qbs in regular season passing yards, only 9 appear in the top 15 playoff passing yards leaders. Kirk Cousins led all QBs with 39,699 regular season yards from 2015-2024, but does not show up on the playoff list at all. Patrick Mahomes leads all QBs in playoff passing yards with 5,148 despite ranking 9th in regular season yards. 
+**Page 2 —QB Efficiency**
+Player-level efficiency page. Passer rating vs. yards-per-attempt, EPA vs. touchdowns, and season-over-season risers/fallers.
 
+**Page 3 — QB Statistics**
+Interactive leaderboard page. Top passing/rushing yardage, TD:INT ratio rankings, and a player slicer for exploration.
 
-**2. QBs are throwing the ball shorter, and total passing yards are declining.**
-Average yards thrown downfield peaked at 8.82 in 2016 and dropped to 7.62 by 2024. Over the same period, average passing yards per season (min 8+ games) fell from 3,760.7 in 2016 to 2,873.64 in 2024 (about a 24% decrease). Defenses have become more adapted to the deep ball, having deeper zone drops. This has caused offenses to look toward shorter throws and decreased overall yardage totals.
+Design convention throughout: bold page titles, italic subtitles, and explicit filter-context notes under each chart (e.g., "Min 6 games and 250+ pass attempts") so sample-size context is always visible.
 
-**3. Quarterbacks are running more.**
-Among QBs with at least 5 rush attempts, average rushing yards per season jumped from 123.88 in 2015 to 178.25 in 2024 (a 44% increase). Yards per carry also increased from 2.93 to 3.86 over the same time span. Offenses are not just using their QBs as runners more often, they are adapting the offense around it.
+## 👨‍🏫 Findings
 
-**4. Elite passer rating seasons come from the same handful of QBs.**
-In the top 15 single-season passer ratings from 2015-2024 (min 6 games and 1,500 yards), Aaron Rodgers, Lamar Jackson, Drew Brees, and Russell Wilson each appear twice. Aaron Rodgers' 2020 season leads the list 122.68. Over half of the list is made up of repeat appearances, showing how big the gap is between truly elite QBs and everyone else.
+**1. Pass attempts are declining, but pass depth distribution has stayed consistent.**
+Average pass attempts per QB fell 16.28% from 2016 to 2025. Despite this, the share of throws at each depth tier (10-, 16-, 20-, and 40-yard air yards) has remained relatively stable across the same period — the passing game has gotten less frequent, not necessarily shorter in shape. Rushing attempts and rushing yards by QBs have slowly increased over this time period while the Avg Passing Yards and Avg Yards Thrown Downfield per Season has slowly decreased.
 
----
+**2.** [FILL IN For Page 2 of Power BI Report]
 
-## File Structure
+**3.** [FILL IN For Page 2 of Power BI Report]
+
+## 🗂️ File Structure
 
 ```
-├── yearly_player_stats_offense.csv      # Raw Kaggle Data
-├── qb_data.ipynb                        # Main Python notebook (cleaning + export)
-├── requirements.txt                     # Modules required to replicate Python code
-├── cleaned_qb_stats.csv                 # Cleaned data output
-├── qb_data_table.sql                    # Table creation script
-├── qb_data_views.sql                    # All 8 SQL views
-├── qb_data_created.xlsx                 # Excel Files wih Views as sheets, pre dashboard creation
-├── qb_data_analysis.xlsx                # Final Excel dashboard
+├── analysis_ready_data/
+│   ├── qb_data_views.xls    # Excel file containing all of the views
+├── cleandata/
+│   ├── cleaned_qb_stats.csv # CSV file created only grabbing the QB position and stats desired
+├── powerbi/
+│   ├── qb_report.pbix       # Final three-page Power BI report
+├── python/
+│   ├── qb_data.ipynb        # Main Python notebook (cleaning + feature engineering + export)
+|   ├── requirements.txt     # Modules required to replicate Python code
+├── rawdata/
+|   ├── post_season
+|        ├── stats_player_post_[year].csv  # Data downloaded (can alter to any year range)
+|   ├── regular_season
+|        ├── stats_player_reg_[year].csv   # Data downloaded (can alter to any year range)
+├── sql/
+│   ├── qb_data_table.sql    # PostgreSQL table creation script
+│   ├── qb_data_views.sql    # All 11 SQL views
 └── README.md
 ```
