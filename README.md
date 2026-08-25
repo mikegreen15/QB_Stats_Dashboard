@@ -5,12 +5,29 @@ This project analyzes NFL quarterback trends and performance from 2016–2025 us
 All calculations and derived metrics are computed using Python or SQL. The Power BI report uses **no DAX measures or calculated columns** — every value shown is computed before it reaches the report.
 
 ## 📖 Table of Contents
-(Add table of contents here)
+- [Disclaimer](#-disclaimer)
+- [Skills Demonstrated](#-skills-demonstrated)
+- [Applications Used](#-applications-used)
+- [Data Source](#-data-source)
+- [Process of Project](#-process-of-project)
+  - [1. Data Collecting & Cleaning](#1--data-collecting--cleaning-python)
+  - [2. PostgreSQL](#2--postgresql)
+  - [3. Excel Export](#3--connecting-to-database-and-created-one-excel-file-python)
+  - [4. Power BI Dashboard](#4--power-bi-dashboard)
+- [Findings](#-findings)
+- [How to Reproduce](#-how-to-reproduce-add-links-here)
+- [File Structure](#-file-structure)
 
 ## 🚨 DISCLAIMER
 This project uses a third-party data source [nflverse-data (stats_player)](https://github.com/nflverse/nflverse-data/releases/tag/stats_player) Data from this source may be inaccurate or incomplete. This project is solely intended to demonstrate skills in Python, SQL, and Power BI.
 
-## 👨‍💻 Applications Used / Needed to Replicate
+## 🔧 Skills Demonstrated
+- Data cleaning & feature engineering (pandas, numpy)
+- Relational database design (PostgreSQL, SQL views, aggregate functions, window filters)
+- BI report design without DAX — calculation logic kept in Python/SQL
+- End-to-end pipeline architecture (raw data → transform → store → visualize)
+
+## 💻 Applications Used
 - **Python** — see See [requirements.txt](python/requirements.txt) for dependencies. for needed packages (pandas, psycopg2, numpy)
 - **PostgreSQL** — database and views (developed using DBeaver)
 - **Power BI Desktop** — report building and visualization
@@ -68,7 +85,7 @@ Includes regular season and postseason statistics for all NFL Players, I have on
 ### Setup Notes
 - Before running [qb_data.ipynb](python/qb_data.ipynb), update the PostgreSQL connection details (host, database, user, password) to match your local environment — see inline comments in the connection cell.
 
-### 4. 🖥️ Power BI Dashboard
+### 4. 📈 Power BI Dashboard
 - Connected Power BI directly to the Excel workbook created in the previous step, with each sheet mapped to its corresponding view.
 - Built a three-page report, all calculations pre-computed in Python/SQL — no DAX used.
 
@@ -88,7 +105,7 @@ Interactive leaderboard page. Top passing/rushing yardage, TD:INT ratio rankings
 ** ADD PICTURE OF PAGE HERE
 
 
-## 👨‍🏫 Findings
+## 	🔍 Findings
 
 **1. Pass attempts are declining, but pass depth distribution has stayed consistent.**
 Average pass attempts per QB fell 16.28% from 2016 to 2025. Despite this, the share of throws at each depth tier (10-, 16-, 20-, and 40-yard air yards) has remained relatively stable across the same period — the passing game has gotten less frequent, not necessarily shorter in shape. Rushing attempts and rushing yards by QBs have slowly increased over this time period while the Avg Passing Yards and Avg Yards Thrown Downfield per Season has slowly decreased.
@@ -105,13 +122,8 @@ Average pass attempts per QB fell 16.28% from 2016 to 2025. Despite this, the sh
 5. Run `qb_data.ipynb` to clean data and generate the Excel workbook
 6. Open `qb_report.pbix` in Power BI Desktop
 
-## 🛠️ Skills Demonstrated
-- Data cleaning & feature engineering (pandas, numpy)
-- Relational database design (PostgreSQL, SQL views, aggregate functions, window filters)
-- BI report design without DAX — calculation logic kept in Python/SQL
-- End-to-end pipeline architecture (raw data → transform → store → visualize)
 
-## 🗂️ File Structure
+## 	📁 File Structure
 
 ```
 ├── analysis_ready_data/
