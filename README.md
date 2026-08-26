@@ -108,6 +108,7 @@ Interactive leaderboard page. Top passing/rushing yardage, TD:INT ratio rankings
 ## 🔍 Findings
 
 **1. Pass attempts are declining, but pass depth distribution has stayed consistent.**
+
 Average pass attempts per QB fell 16.28% from 2016 to 2025. Despite this, the share of throws at each depth tier (10-, 16-, 20-, and 40-yard air yards) has remained relatively stable across the same period — the passing game has gotten less frequent, not necessarily shorter in shape. Rushing attempts and rushing yards by QBs have slowly increased over this time period while the Avg Passing Yards and Avg Yards Thrown Downfield per Season has slowly decreased.
 
 **2. Most QBs See a Decline in Passer Rating During the Playoffs**
