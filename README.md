@@ -42,7 +42,7 @@ Includes regular season and postseason statistics for all NFL Players, I have on
 - Pulled raw regular season and postseason QB data from 2016-2025 seasons.
 - Using pandas, filtered to QB-specific stats across the chosen seasons.
 - Engineered new stat fields for each QB season, listed below.
-- Cleaned nulls and handled edge cases (e.g., zero-interception seasons in ratio calculations).
+- Cleaned nulls and handled edge cases.
 - Exported the cleaned data as a CSV to import into PostgreSQL.
 
 | Stat | Formula |
@@ -57,7 +57,8 @@ Includes regular season and postseason statistics for all NFL Players, I have on
 | Total Yards | Passing + Rushing + Receiving Yards |
 | Total TDs | Passing + Rushing + Receiving TDs |
 | Total EPA | Passing EPA + Rushing EPA |
-| EPA Per Dropback | Total EPA / Total Dropbacks |
+| Total Dropbacks | Passing EPA + Rushing EPA |
+| EPA Per Dropbacks | Sacks Suffered / QB Attempts |
 | Passer Rating | Standard NFL formula |
 
 ### 2. 📝 PostgreSQL
