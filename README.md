@@ -57,8 +57,8 @@ Includes regular season and postseason statistics for all NFL Players, I have on
 | Total Yards | Passing + Rushing + Receiving Yards |
 | Total TDs | Passing + Rushing + Receiving TDs |
 | Total EPA | Passing EPA + Rushing EPA |
-| Total Dropbacks | Passing EPA + Rushing EPA |
-| EPA Per Dropbacks | Sacks Suffered / QB Attempts |
+| Total Dropbacks | Pass Attempts + Sacks Suffered  |
+| EPA Per Dropbacks | Total EPA / Total Dropbacks |
 | Passer Rating | Standard NFL formula |
 
 ### 2. 📝 PostgreSQL
